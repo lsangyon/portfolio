@@ -1,3 +1,4 @@
+
 # I/O Multiplexing 기반 멀티 클라이언트 채팅 서버
 ## Overview
 
@@ -128,7 +129,7 @@ Server
 두 번째 클라이언트가 처음에는 이미 사용 중인 `lee` 닉네임으로 접속을 시도했지만, 서버가 이를 거부합니다.
 이후 `kim`이라는 다른 닉네임으로 재접속하여 정상적으로 채팅에 참여하는 것을 확인했습니다.
 
-<!-- 이미지 삽입 위치 -->
+<img width="1362" height="1448" alt="스크린샷 2026-06-17 113802" src="https://github.com/user-attachments/assets/e500b6e8-ac6c-4867-8e8c-fe8dc68399b5" />
 
 <!-- 예시: ![Nickname Duplicate Check](./img/client-kim.png) -->
 
