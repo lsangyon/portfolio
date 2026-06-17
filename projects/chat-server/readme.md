@@ -118,7 +118,8 @@ Server
 첫 번째 클라이언트가 `lee`라는 닉네임으로 접속한 뒤, 다른 사용자와 메시지를 주고받는 결과입니다.
 각 메시지 앞에는 `[YYYY-MM-DD HH:MM:SS]` 형식의 타임스탬프와 발신자 이름이 표시됩니다.
 
-<img width="1362" height="1448" alt="스크린샷 2026-06-17 113802" src="https://github.com/user-attachments/assets/e500b6e8-ac6c-4867-8e8c-fe8dc68399b5" />
+<img width="1362" height="1170" alt="스크린샷 2026-06-17 113802" src="https://github.com/user-attachments/assets/babbc6d1-06dc-4c90-a760-c79f495c70d2" />
+
 
 <!-- 예시: ![Client 1 Result](./img/client-lee.png) -->
 
@@ -129,7 +130,8 @@ Server
 두 번째 클라이언트가 처음에는 이미 사용 중인 `lee` 닉네임으로 접속을 시도했지만, 서버가 이를 거부합니다.
 이후 `kim`이라는 다른 닉네임으로 재접속하여 정상적으로 채팅에 참여하는 것을 확인했습니다.
 
-<img width="1288" height="1238" alt="스크린샷 2026-06-17 121215" src="https://github.com/user-attachments/assets/d9b18c4e-f66b-4d95-b60f-09953c357e5a" />
+<img width="1288" height="1169" alt="스크린샷 2026-06-17 121215" src="https://github.com/user-attachments/assets/fb704ea1-d4e4-4b4b-bee9-745738b5a8d6" />
+
 
 <!-- 예시: ![Nickname Duplicate Check](./img/client-kim.png) -->
 
@@ -140,7 +142,8 @@ Server
 두 명의 사용자가 대화 중인 상태에서 세 번째 클라이언트 `koreano`가 중간에 접속했습니다.
 중간에 참여한 사용자도 이후 메시지를 정상적으로 송수신하는 것을 확인했습니다.
 
-<img width="1348" height="1336" alt="스크린샷 2026-06-17 121234" src="https://github.com/user-attachments/assets/cc6825f0-f51e-4bba-a07a-cfde3cb2757a" />
+<img width="1348" height="1279" alt="스크린샷 2026-06-17 121234" src="https://github.com/user-attachments/assets/6a62dbb6-d1be-48cd-953b-80daf38a0525" />
+
 
 <!-- 예시: ![Client 3 Join](./img/client-koreano.png) -->
 
@@ -151,7 +154,8 @@ Server
 서버 로그에서는 클라이언트 접속, 닉네임 중복 발생, 재접속, 추가 클라이언트 접속 상황을 확인할 수 있습니다.
 이를 통해 서버가 접속 상태와 예외 상황을 관리하고 있음을 확인했습니다.
 
-<img width="1270" height="763" alt="스크린샷 2026-06-17 121259" src="https://github.com/user-attachments/assets/f2f8a186-799a-408b-af2c-93f78d52e27e" />
+<img width="1270" height="763" alt="스크린샷 2026-06-17 121259" src="https://github.com/user-attachments/assets/e43cec81-9c0b-4c45-8a1a-6bef70e7e6ee" />
+
 
 <!-- 예시: ![Server Log](./img/server-log.png) -->
 
