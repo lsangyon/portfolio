@@ -157,11 +157,10 @@ CASL II code (.cas)
 
 ## Example
 
-이 컴파일러는 Pascal 계열 프로그램을 토큰화한 `.ts` 파일을 입력으로 받아 CASL II 코드로 변환합니다.
+아래는 간단한 Pascal 계열 프로그램을 토큰화한 .ts 파일을 입력으로 받아 CASL II 코드로 변환하는 예시입니다.
+이 컴파일러는 .pas 파일을 직접 입력받는 것이 아니라, Lexer를 통해 생성된 .ts 파일을 Compiler 단계의 입력으로 사용합니다.
 
 ### Source Program
-
-```pascal
 program test;
 var
   x: integer;
@@ -169,25 +168,39 @@ begin
   x := 1 + 2;
   writeln(x)
 end.
-```
 
-### Compile Token File
+위와 같은 Pascal 계열 프로그램은 Lexer를 거쳐 토큰 파일로 변환됩니다.
+Compiler는 이 토큰 파일을 입력으로 받아 문법 분석, 의미 분석, 코드 생성을 수행합니다.
 
-```bash
+Compile Token File
 ./gradlew run --args="compiler data/ts/normal01.ts out.cas"
-```
 
-### Generated CASL II
+정상적으로 컴파일되면 out.cas 파일이 생성됩니다.
 
-```asm
+### Generated CASL II Example
+
+생성되는 CASL II 코드는 구현 방식과 테스트 파일에 따라 달라질 수 있으나, 기본적으로 시작 코드, 변수 저장 영역, 산술 연산, 출력 처리, 라이브러리 호출 코드가 포함됩니다.
+
 CASL    START   BEGIN
 BEGIN   LAD     GR6, 0
         LAD     GR7, LIBBUF
-        ...
-```
 
-정상적으로 컴파일되면 `out.cas` 파일이 생성됩니다.
-생성된 CASL II 코드는 변수 저장 영역, 산술 연산, 출력 처리, 라이브러리 호출 등을 포함합니다.
+        ; x := 1 + 2
+        PUSH    1
+        PUSH    2
+        POP     GR2
+        POP     GR1
+        ADDA    GR1, GR2
+        PUSH    0, GR1
+
+        ; writeln(x)
+        CALL    WRTINT
+        CALL    WRTLN
+
+VAR     DS      1
+        END
+
+위 예시는 전체 출력이 아니라, Pascal 계열 프로그램의 대입문과 출력문이 CASL II 명령 흐름으로 변환되는 방식을 설명하기 위한 축약 예시입니다. 실제 출력 파일에는 테스트 케이스에 따라 라벨, 변수 영역, 라이브러리 호출 코드 등이 추가됩니다.
 
 
 ## What I Learned
