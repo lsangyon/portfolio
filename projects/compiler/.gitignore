@@ -1,0 +1,10 @@
+build/
+out/
+tmp/*
+!tmp/.gitkeep
+.gradle/
+.idea/
+*.class
+*.com
+*.log
+.DS_Store

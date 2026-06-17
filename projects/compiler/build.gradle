@@ -1,0 +1,73 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' // Set default encoding
+    options.release = 21       // Use jdk21
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'lib', include: '*.jar') // Local libs
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+}
+
+jar {
+    // Specify App's entry point
+    manifest {
+        attributes "Main-Class": "enshud.Main"
+    }
+    // Include all dependent jars
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+// Global test parameters for jenkins
+tasks.withType(Test).all {
+    useJUnitPlatform()
+    systemProperty "file.encoding", "utf-8"
+
+    // Avoid UP-TO-DATE failure because of gradle caching on Jenkins.
+    outputs.upToDateWhen { false }
+
+    // Custom validation for System.exit(0)
+    def testFailure = false
+    afterSuite { desc, result ->
+        if (result.failedTestCount > 0 || result.skippedTestCount > 0) {
+            testFailure = true
+        }
+    }
+    doLast {
+        if (testFailure) {
+            throw new GradleException("There were failing or skipping tests.")
+        }
+    }
+}
+
+// Workaround to use UTF-8 on gradle eclipse plugin
+// https://github.com/gradle/gradle/issues/898
+eclipseJdt.doLast {
+    File f = file('.settings/org.eclipse.core.resources.prefs')
+    f.write('eclipse.preferences.version=1\n')
+    f.append('encoding/<project>=UTF-8')
+}
+
+
+application {
+    mainClass = 'enshud.Main'
+}
